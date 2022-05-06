@@ -2,6 +2,7 @@ package com.account.plugins
 
 import com.account.exception.AuthenticationException
 import com.account.exception.AuthorizationException
+import com.account.exception.UserNotFoundException
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*
@@ -14,6 +15,9 @@ fun Application.configureStatusPage() {
         }
         exception<AuthorizationException> { call, _ ->
             call.respond(HttpStatusCode.Forbidden)
+        }
+        exception<UserNotFoundException> { call, _ ->
+            call.respond(HttpStatusCode.NotFound)
         }
     }
 }

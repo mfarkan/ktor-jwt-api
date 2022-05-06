@@ -6,20 +6,23 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import io.ktor.server.config.*
 import io.ktor.server.response.*
 import java.util.*
 
 fun Application.configureSecurity() {
-    val jwtAudience = environment.config.property("jwt.audience").getString()
-    val configRealm = environment.config.property("jwt.realm").getString()
-    val domain = environment.config.property("jwt.domain").getString()
-    val subjectConfig = environment.config.property("jwt.subject").getString()
-    val secretKey = environment.config.property("security.secret").getString()
+    val jwtConfig = environment.config.config("jwt")
+
+    val jwtAudience = jwtConfig.tryGetString("audience")
+    val configRealm = jwtConfig.tryGetString("realm")
+    val domain = jwtConfig.tryGetString("domain")
+    val subjectConfig = jwtConfig.tryGetString("subject")
+    val secretKey = environment.config.property("ktor.security.secret").getString()
     val expireInMs = 1_200_000L
 
     install(Authentication) {
         jwt("jwt-token") {
-            realm = configRealm
+            realm = configRealm.orEmpty()
             verifier(
                 JWT
                     .require(Algorithm.HMAC512(secretKey))
