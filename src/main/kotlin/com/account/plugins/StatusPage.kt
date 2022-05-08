@@ -2,6 +2,7 @@ package com.account.plugins
 
 import com.account.exception.AuthenticationException
 import com.account.exception.AuthorizationException
+import com.account.exception.TokenCreationException
 import com.account.exception.UserNotFoundException
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -18,6 +19,9 @@ fun Application.configureStatusPage() {
         }
         exception<UserNotFoundException> { call, _ ->
             call.respond(HttpStatusCode.NotFound)
+        }
+        exception<TokenCreationException> { call, _ ->
+            call.respond(HttpStatusCode.InternalServerError)
         }
     }
 }

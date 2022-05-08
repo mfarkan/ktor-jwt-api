@@ -4,9 +4,13 @@ import com.account.controller.authRoute
 import com.account.plugins.configureSecurity
 import com.account.plugins.configureSerialization
 import com.account.plugins.configureStatusPage
+import com.account.repository.UserRepository
 import com.account.service.DatabaseFactory
 import com.account.service.TokenProviderService
+import com.account.service.UserService
+import com.typesafe.config.ConfigFactory
 import io.ktor.server.application.*
+import io.ktor.server.config.*
 import io.ktor.server.routing.*
 
 fun main(args: Array<String>): Unit =
@@ -18,12 +22,14 @@ fun Application.module() {
     configureSerialization()
     configureStatusPage()
 
-    DatabaseFactory().initialize()
-    val tokenProviderService = TokenProviderService()
-
+    val config = HoconApplicationConfig(ConfigFactory.load())
+    DatabaseFactory(config).initialize()
+    val tokenProviderService = TokenProviderService(config)
+    val userRepository = UserRepository()
+    val userService = UserService(userRepository)
     routing {
         route("api") {
-            authRoute(tokenProviderService)
+            authRoute(tokenProviderService, userService)
         }
     }
 }

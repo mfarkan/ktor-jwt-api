@@ -11,6 +11,7 @@ data class ApplicationUserDomain(
     val status: Status, val firmId: Int?
 )
 
+// TODO: should consider to password as hash string.
 object ApplicationUser : IntIdTable("application_users") {
     var Name: Column<String> = varchar("name", 100).uniqueIndex()
     var Password: Column<String> = varchar("password", 100)
