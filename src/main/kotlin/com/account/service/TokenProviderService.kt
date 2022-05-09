@@ -26,7 +26,7 @@ class TokenProviderService(private val config: HoconApplicationConfig) {
                 val audience = config.tryGetString("jwt.audience")
                 val domain = config.tryGetString("jwt.domain")
                 val secretKey = config.property("ktor.security.secret").getString()
-                val expireInMs = 1_200_000L
+                val expireInMs = config.tryGetString("jwt.expireInMs")?.toLong() ?: 1_200_000L
 
                 JWT.create()
                     .withAudience(audience)
