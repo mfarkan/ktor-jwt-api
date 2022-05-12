@@ -1,6 +1,7 @@
 package com.account
 
 import com.account.controller.authRoute
+import com.account.controller.userRoute
 import com.account.plugins.configureSecurity
 import com.account.plugins.configureSerialization
 import com.account.plugins.configureStatusPage
@@ -30,6 +31,7 @@ fun Application.module() {
     routing {
         route("api") {
             authRoute(tokenProviderService, userService)
+            userRoute(userService)
         }
     }
 }

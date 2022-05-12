@@ -32,3 +32,5 @@ fun ApplicationUser.fromRow(resultRow: ResultRow): ApplicationUserDomain = Appli
     resultRow[Status],
     resultRow[FirmId]?.value
 )
+
+

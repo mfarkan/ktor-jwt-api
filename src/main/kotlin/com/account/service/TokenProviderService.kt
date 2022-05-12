@@ -20,13 +20,13 @@ class TokenProviderService(private val config: HoconApplicationConfig) {
     suspend fun createToken(applicationUserResponse: ApplicationUserDomain): TokenResponse = coroutineScope {
         var accessToken: String
         val createdAt = getTimeMillis()
+        val expireInMs = config.tryGetString("jwt.expireInMs")?.toLong() ?: 1_200_000L
         try {
             async {
                 val subject = config.tryGetString("jwt.subject")
                 val audience = config.tryGetString("jwt.audience")
                 val domain = config.tryGetString("jwt.domain")
                 val secretKey = config.property("ktor.security.secret").getString()
-                val expireInMs = config.tryGetString("jwt.expireInMs")?.toLong() ?: 1_200_000L
 
                 JWT.create()
                     .withAudience(audience)
@@ -45,6 +45,6 @@ class TokenProviderService(private val config: HoconApplicationConfig) {
             log.warn("Something failed when creating access token for $${ex.message}")
             throw TokenCreationException()
         }
-        TokenResponse(accessToken, createdAt)
+        TokenResponse(accessToken, createdAt, expireInMs)
     }
 }
