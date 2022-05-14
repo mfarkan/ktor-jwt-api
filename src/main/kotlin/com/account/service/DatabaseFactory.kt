@@ -4,17 +4,34 @@ import com.account.domain.ApplicationFirm
 import com.account.domain.ApplicationUser
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.Schema
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class DatabaseFactory(private val config: HoconApplicationConfig) {
     fun initialize() {
-        Database.connect(hikariDataSource())
+        val schemaName = config.property("ktor.security.schemaName").getString()
+        val dataSource = hikariDataSource()
+        Database.connect(dataSource)
         transaction {
+            SchemaUtils.createSchema(Schema(schemaName))
             SchemaUtils.create(tables = arrayOf(ApplicationFirm, ApplicationUser))
         }
+        runFlyWay(dataSource)
+    }
 
+    private fun runFlyWay(dataSource: HikariDataSource): Unit {
+        val flyway = Flyway.configure()
+            .dataSource(dataSource)
+            .load()
+        try {
+            flyway.info()
+            flyway.migrate()
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
     private fun hikariDataSource(): HikariDataSource {

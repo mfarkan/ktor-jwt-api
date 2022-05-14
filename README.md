@@ -1,13 +1,19 @@
+[![Kotlin](https://img.shields.io/badge/kotlin-1.6.21-red.svg?logo=kotlin)](http://kotlinlang.org)
+[![Ktor](https://img.shields.io/badge/ktor-2.0.1-red.svg)](https://github.com/ktorio/ktor)
+[![Exposed](https://img.shields.io/badge/exposed-0.38.2-red.svg?logo=postgresql)](https://github.com/ktorio/ktor)
+
 # Welcome to Login API!
 
 In this example repository, you will be able to see KTOR based backend application working with a couple of techniques ;
 
 - [KTOR](https://ktor.io/)
   > Kotlin based web framework.
-- JWT
+- [JWT](https://jwt.io)
 - [Exposed](https://github.com/JetBrains/Exposed)
   > ORM Framework for Kotlin.
-- PostgreSQL
+- [PostgreSQL](https://www.postgresql.org/)
+- [Flyway](https://github.com/flyway/flyway)
+  > Migration tool for relation
 
 ## JWT UML
 

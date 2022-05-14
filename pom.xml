@@ -14,6 +14,7 @@
         <logback_version>1.2.9</logback_version>
         <exposed_version>0.38.2</exposed_version>
         <postgre_version>42.3.3</postgre_version>
+        <flyway_version>8.5.10</flyway_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>io.ktor.server.netty.EngineMain</main.class>
@@ -46,6 +47,12 @@
             <artifactId>ktor-server-auth-jwt-jvm</artifactId>
             <version>${ktor_version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway_version}</version>
+        </dependency>
+
         <dependency>
             <groupId>io.ktor</groupId>
             <artifactId>ktor-server-host-common-jvm</artifactId>
