@@ -1,0 +1,13 @@
+version: '3.4'
+networks:
+  working-with-db:
+    driver: bridge
+services:
+  backend:
+    image: k-login-api:latest
+    mem_reservation: 1024m
+    restart: always
+    networks:
+      - working-with-db
+    ports:
+      - "9090:8080"

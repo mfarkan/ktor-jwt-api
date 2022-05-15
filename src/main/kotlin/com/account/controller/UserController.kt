@@ -19,15 +19,6 @@ fun Route.userRoute(userService: UserService) {
                 val appUser = userService.findUserByName(username)
                 call.respond(message = appUser, status = HttpStatusCode.OK)
             }
-            post {
-
-            }
-            put {
-
-            }
-            delete {
-
-            }
         }
     }
 }

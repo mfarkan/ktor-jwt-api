@@ -1,6 +1,6 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.6.21-red.svg?logo=kotlin)](http://kotlinlang.org)
-[![Ktor](https://img.shields.io/badge/ktor-2.0.1-red.svg)](https://github.com/ktorio/ktor)
-[![Exposed](https://img.shields.io/badge/exposed-0.38.2-red.svg?logo=postgresql)](https://github.com/ktorio/ktor)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.6.21-red.svg?logo=kotlin "Kotlin Version")](http://kotlinlang.org)
+[![Ktor Server Version](https://img.shields.io/badge/ktor-2.0.1-red.svg "Ktor Server Version")](https://github.com/ktorio/ktor)
+[![PostgreSQL Version](https://img.shields.io/badge/exposed-0.38.2-red.svg?logo=postgresql "PostgreSQL Version")](https://www.postgresql.org/)
 
 # Welcome to Login API!
 
@@ -13,7 +13,34 @@ In this example repository, you will be able to see KTOR based backend applicati
   > ORM Framework for Kotlin.
 - [PostgreSQL](https://www.postgresql.org/)
 - [Flyway](https://github.com/flyway/flyway)
-  > Migration tool for relation
+  > Migration tool for database
+
+## Installation
+
+With docker, this application will be exposed on 8080 port.
+
+```bash
+docker compose build
+docker compose up
+```
+
+## Environment Configuration
+
+In [**
+application.conf**](https://github.com/mfarkan/k-account-login-api/blob/master/src/main/resources/application.conf)
+you will see some environment for working in local environment or if you want to run this app
+in another database, you should change these configurations for your data;
+
+- PORT
+  > If you change this config, your application will be working on that port.
+- JWT_SECRET
+  > Secret for JWT creation.
+- DB_PASSWORD
+  > database password
+- DB_CONNECTION
+  > database connection string
+- DB_USERNAME
+  > database username
 
 ## JWT UML
 
