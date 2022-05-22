@@ -7,7 +7,26 @@ services:
     image: k-login-api:latest
     mem_reservation: 1024m
     restart: always
+    environment:
+      DB_PASSWORD: "123456"
+      DB_CONNECTION: "jdbc:postgresql://postgres_database:5432/account"
+      DB_USERNAME: "loginAccount"
     networks:
       - working-with-db
     ports:
       - "9090:8080"
+  postgres_database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: "always"
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "loginAccount"
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: "account"
+    networks:
+      - working-with-db
+volumes:
+  db_volume:

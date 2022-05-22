@@ -2,7 +2,8 @@
 #   Build-Stage
 #
 FROM maven:3.8.4-openjdk-11-slim AS build
-MAINTAINER login-api.mfarkan.com
+LABEL "MAINTAINER" = "mfarkan"
+LABEL "GITHUB" = "https://github.com/mfarkan"
 WORKDIR /tmp
 COPY . .
 RUN mvn verify -U --no-transfer-progress -Dmaven.test.skip=true -Dmaven.repo.local=/.m2/repository
