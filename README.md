@@ -26,8 +26,7 @@ docker compose up
 
 ## Environment Configuration
 
-In [**
-application.conf**](https://github.com/mfarkan/k-account-login-api/blob/master/src/main/resources/application.conf)
+In [**application.conf**](https://github.com/mfarkan/k-account-login-api/blob/master/src/main/resources/application.conf)
 you will see some environment for working in local environment or if you want to run this app
 in another database, you should change these configurations for your data;
 
