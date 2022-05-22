@@ -17,18 +17,21 @@ In this example repository, you will be able to see KTOR based backend applicati
 
 ## Installation
 
-With docker, this application will be exposed on 8080 port.
+With docker compose, the application will be exposed on **_9090_** port with **_5432_** database connections.
 
 ```bash
 docker compose build
 docker compose up
 ```
 
+> **Note:** If you want to change ports of the configuration, please check Dockerfile and docker-compose.yml
+
 ## Environment Configuration
 
-In [**application.conf**](https://github.com/mfarkan/k-account-login-api/blob/master/src/main/resources/application.conf)
-you will see some environment for working in local environment or if you want to run this app
-in another database, you should change these configurations for your data;
+In
+[**application.conf**](https://github.com/mfarkan/k-account-login-api/blob/master/src/main/resources/application.conf)
+you will see some environment variables for test purposes. If you want to run this app
+in another circumstances, you should change these variables either in **application.conf** or **Dockerfile**.
 
 - PORT
   > If you change this config, your application will be working on that port.
